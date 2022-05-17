@@ -46,7 +46,7 @@ async function run() {
 
     const verifyAdmin = async (req, res, next) => {
       const requester = req.decoded.email;
-      const requesterAccount = await userCollection.findOne({
+      const requesterAccount = await usersCollection.findOne({
         email: requester,
       });
       if (requesterAccount.role === "admin") {
@@ -130,7 +130,7 @@ async function run() {
       const updateDoc = {
         $set: { role: "admin" },
       };
-      const result = await userCollection.updateOne(filter, updateDoc);
+      const result = await usersCollection.updateOne(filter, updateDoc);
       res.send(result);
     });
 
